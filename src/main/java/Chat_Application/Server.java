@@ -1,4 +1,4 @@
-package org.example;
+package Chat_Application;
 
 import java.io.IOException;
 import java.net.ServerSocket;
