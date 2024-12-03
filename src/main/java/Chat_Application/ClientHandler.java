@@ -79,7 +79,7 @@ public class ClientHandler implements Runnable {
                 bufferedWriter.close();
             }
         } catch(IOException e) {
-            closeEverything(socket,bufferedWriter,bufferedReader);
+           e.printStackTrace();
         }
     }
 }
