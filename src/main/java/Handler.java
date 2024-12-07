@@ -17,7 +17,7 @@ public class Handler implements Runnable {
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.username = bufferedReader.readLine();
             clientHandlers.add(this);
-            System.out.println("Here "+clientHandlers);
+            System.out.println(this.username+" has entered the chat room!");
             broadCastMessage("Server : "+this.username+" has entered the chat room!");
         } catch (Exception e) {
             closeEverything(socket,bufferedWriter,bufferedReader);
@@ -40,7 +40,7 @@ public class Handler implements Runnable {
     private void receiveMessage() throws IOException {
         String messageFromClient = bufferedReader.readLine();
         if(messageFromClient != null) {
-            broadCastMessage(messageFromClient);
+            broadCastMessage(this.username+" : "+messageFromClient);
         }
     }
 
@@ -51,7 +51,6 @@ public class Handler implements Runnable {
                         clientHandler.bufferedWriter.write(message);
                         clientHandler.bufferedWriter.newLine();
                         clientHandler.bufferedWriter.flush();
-                        System.out.println(this.username + " :- " + message);
                     }
                 } catch(IOException e){
                     closeEverything(socket, bufferedWriter, bufferedReader);

@@ -41,15 +41,21 @@ public class Client {
     }
 
     // This will be used to receive message from the group chat
-    private void receiveMessage() {
+    public void receiveMessage() {
         new Thread(new Runnable() {
             public void run() {
                 while (socket.isConnected()){
                     try {
                         String messageReceived = reader.readLine();
+                        if(messageReceived == null) {
+                            System.out.println("Client is Disconnected");
+                            closeEverything(socket,reader,writer);
+                            break;
+                        }
                         System.out.println(messageReceived);
                     } catch (IOException e) {
                         closeEverything(socket,reader,writer);
+                        break;
                     }
                 }
             }
@@ -78,7 +84,7 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         String username = scanner.nextLine();
         Client client = new Client(socket,username);
-        client.shareMessage();
         client.receiveMessage();
+        client.shareMessage();
     }
 }
