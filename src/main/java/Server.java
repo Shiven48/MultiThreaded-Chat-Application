@@ -1,5 +1,3 @@
-package Chat_Application;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -7,7 +5,7 @@ import java.net.Socket;
 public class Server {
 
     private static final int port = 8080;
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
 
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
@@ -18,7 +16,7 @@ public class Server {
        try{
            while(!serverSocket.isClosed()){
                Socket socket = serverSocket.accept();
-               ClientHandler clientHandler= new ClientHandler(socket);
+               Handler clientHandler = new Handler(socket);
                Thread thread = new Thread(clientHandler);
                thread.start();
            }

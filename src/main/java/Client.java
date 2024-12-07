@@ -1,5 +1,3 @@
-package Chat_Application;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -55,7 +53,7 @@ public class Client {
                     }
                 }
             }
-        });
+        }).start();
     }
 
     public void closeEverything(Socket socket,BufferedReader reader,BufferedWriter writer) {
@@ -77,8 +75,8 @@ public class Client {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost",port);
         System.out.println("Enter your Username : ");
-        // Using command line argument to take input
-        String username = args[0];
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
         Client client = new Client(socket,username);
         client.shareMessage();
         client.receiveMessage();
